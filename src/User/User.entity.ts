@@ -4,19 +4,30 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
-export class CustomerModel {
+export class User {
+  // @Field()
   @PrimaryGeneratedColumn('uuid')
   id: string;
+  // @Field()
   @Column({ length: 500, nullable: false })
-  name: string;
+  username: string;
+  // @Field()
   @Column('text', { nullable: false })
   email: string;
+
+  @Column({ nullable: false, default: 15 })
+  maxGB: number;
+
+  @Column({ nullable: false, default: 0 })
+  takenGB: number;
+
+  @Column('text', { nullable: false })
+  password: string;
   // @Field()
   // @Column('varchar', { length: 15 })
   // phone: string;
@@ -26,9 +37,11 @@ export class CustomerModel {
   // @Field((type) => [InvoiceModel], { nullable: true })
   // @OneToMany((type) => InvoiceModel, (invoice) => invoice.customer)
   // invoices: InvoiceModel[];
+  // @Field()
   @Column()
   @CreateDateColumn()
   created_at: Date;
+  // @Field()
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
