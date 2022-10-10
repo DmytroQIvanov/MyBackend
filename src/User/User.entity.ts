@@ -17,7 +17,8 @@ export class User {
   @Column({ length: 500, nullable: false })
   username: string;
   // @Field()
-  @Column('text', { nullable: false })
+
+  @Column('text', { nullable: false, unique: true })
   email: string;
 
   @Column({ nullable: false, default: 15 })
