@@ -25,6 +25,12 @@ export class AuthController {
 
   @Post('/sign-up')
   async signUp(@Body() body: createUserDto) {
+    if (!body.password || !body.username || !body.email) {
+      throw new HttpException(
+        'Enter all required data',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     console.log(body);
     return await this.userService.createUser(body);
   }
