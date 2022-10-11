@@ -48,10 +48,7 @@ export class AuthController {
       // response.cookie('Authentication', `Bearer ${authResponse.access_token}`);
       response.cookie('Authentication', `${authResponse.access_token}`);
     } else {
-      throw new NotFoundException(
-        'Incorrect login or password',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new NotFoundException('Incorrect login or password');
     }
     return user;
   }
