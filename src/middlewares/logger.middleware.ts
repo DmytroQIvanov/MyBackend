@@ -19,6 +19,7 @@ export class LoggerMiddleware implements NestMiddleware {
     console.log('token', token);
     const userData = this.authService.verifyToken({ token });
 
+    console.log('tokenUSERDATA', userData);
     req.user = userData;
     console.log('Request...');
     next();

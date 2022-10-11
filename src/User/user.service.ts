@@ -18,7 +18,7 @@ export class UserService {
   async findOne(email): Promise<User> {
     let user;
     try {
-      user = await this.userRepository.findOne({ where: { email: email } });
+      user = await this.userRepository.findOne({ where: { email } });
     } catch {
       throw new HttpException('Not found', HttpStatus.BAD_REQUEST);
     }
@@ -29,6 +29,7 @@ export class UserService {
     let user;
     try {
       user = await this.userRepository.findOne({ where: { id } });
+      console.log('user', user);
     } catch {
       throw new HttpException('Not found', HttpStatus.BAD_REQUEST);
     }

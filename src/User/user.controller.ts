@@ -17,6 +17,6 @@ export class UserController {
   @Get('profile')
   async getAccountProfile(@Req() request) {
     console.log(request.user);
-    return await this.userService.findOneById(request.user.id);
+    return await this.userService.findOneById(request.user.sub);
   }
 }

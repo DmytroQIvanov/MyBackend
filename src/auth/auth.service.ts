@@ -24,6 +24,7 @@ export class AuthService {
     if (!email && !password)
       throw new HttpException('Validate', HttpStatus.BAD_REQUEST);
     const user = await this.userService.findOne(email);
+    console.log(user, 'user');
 
     if (user && user.password) {
       // const hash = await bcrypt.compare(user.password, password);
@@ -46,6 +47,7 @@ export class AuthService {
 
     try {
       result = this.jwtService.verify(token, { secret: jwtConstants.secret });
+      console.log('verifyToken', result);
     } catch (e) {
       console.log(e);
       throw new HttpException('Forbidden2', HttpStatus.FORBIDDEN);
