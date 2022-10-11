@@ -2,6 +2,9 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
   NotFoundException,
   Post,
   Req,
@@ -31,6 +34,12 @@ export class AuthController {
     @Body() body: loginUserDto,
     @Res({ passthrough: true }) response,
   ) {
+    if (!body.password || !body.email) {
+      throw new HttpException(
+        'Incorrect login or password',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     console.log(body);
     const user = await this.authService.validateUser({ ...body });
     if (user) {
@@ -39,7 +48,10 @@ export class AuthController {
       // response.cookie('Authentication', `Bearer ${authResponse.access_token}`);
       response.cookie('Authentication', `${authResponse.access_token}`);
     } else {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException(
+        'Incorrect login or password',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     return user;
   }
